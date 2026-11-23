@@ -1,0 +1,18 @@
+---
+description: Enforce Clean Architecture and feature-sliced boundaries in .NET solutions (Domain, Application, Infrastructure, API).
+globs:
+  - "**/*.cs"
+  - "**/*.csproj"
+alwaysApply: false
+---
+
+# .NET Clean Architecture Rules
+
+Maintain strict inward dependency direction (`API / Infrastructure -> Application -> Domain`):
+
+1. **Pure Domain**: Keep `Domain` free of EF Core, ASP.NET Core, HTTP clients, and persistence attributes. Protect invariants via private setters, factory methods, and domain behavior methods.
+2. **Feature-Sliced Application**: Organize use cases by feature (`Orders/CreateOrder/`) with focused handlers and explicit port interfaces (`IOrderRepository`, `IUnitOfWork`).
+3. **Explicit Results**: Return `Result` / `Result<T>` with typed domain errors for expected business failures; reserve exceptions for unexpected failures.
+4. **No Leaky Generic Repositories**: Avoid `IGenericRepository<T>` returning `IQueryable<T>`. Use aggregate-specific repositories for writes and lean projections (`AsNoTracking()`) for reads.
+5. **Thin Endpoints**: Minimal API endpoints only bind input, delegate to Application handlers, and map `Result<T>` to `TypedResults` / RFC 9457 `ProblemDetails`.
+6. **Persistence Config in Infrastructure**: Configure EF Core mappings using `IEntityTypeConfiguration<T>` in `Infrastructure`.
