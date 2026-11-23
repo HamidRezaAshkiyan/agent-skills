@@ -1,0 +1,14 @@
+---
+description: Perform structured, severity-ranked code reviews on diffs, branches, or Pull Requests focusing on bugs, security, concurrency, compatibility, and tests.
+alwaysApply: false
+---
+
+# PR Review Rules
+
+When asked to review code, a diff, a branch, or a Pull Request:
+
+1. Inspect the full diff (`git diff main...HEAD`, `git diff --staged`, or `gh pr diff`) and read surrounding context before flagging issues.
+2. Focus on real impact: **correctness & edge cases**, **security & authorization**, **concurrency & cancellation**, **API/DB backward compatibility**, **performance (N+1, unbounded queries)**, and **test coverage**.
+3. Skip formatting/style nitpicks that belong in linters.
+4. Rank findings by severity (**🔴 Blocker**, **🟠 Major**, **🟡 Minor**, **❓ Question**) with exact `file:line` references, concrete failure modes, and minimal suggested fixes.
+5. End with a clear verdict (`Approve`, `Approve with comments`, or `Request changes`).
