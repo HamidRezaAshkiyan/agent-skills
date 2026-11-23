@@ -1,0 +1,29 @@
+---
+description: Enforce Gitmoji commit conventions whenever staging, drafting, amending, or creating Git commits.
+alwaysApply: false
+---
+
+# Gitmoji Commit Rules
+
+When creating or drafting Git commits, follow the [Gitmoji](https://gitmoji.dev) convention:
+
+1. **Inspect before committing**: Run `git status --short`, `git diff --staged` (or `git diff`), and `git log -n 5 --oneline` to match the repository's emoji format (Unicode emoji by default, e.g., `✨`, unless the repo uses shortcodes like `:sparkles:`).
+2. **One emoji, one intent**: Prefix every commit subject with a single Gitmoji matching the primary intent. Split unrelated changes into atomic commits.
+3. **Imperative & concise**: Use imperative mood, capitalize the first word after the emoji, omit trailing periods, and keep the subject <= 50-72 characters.
+4. **Common prefixes**:
+   - `✨` New feature
+   - `🐛` Bug fix (`🚑️` critical hotfix, `🩹` minor non-critical fix)
+   - `♻️` Refactor (`🎨` formatting/structure)
+   - `⚡️` Performance improvement
+   - `📝` Documentation
+   - `✅` Tests
+   - `🔥` Remove code/files
+   - `🔒️` Security fix
+   - `💄` UI/styles
+   - `🔧` Configuration (`🔨` dev scripts)
+   - `⬆️` / `⬇️` / `➕` / `➖` Dependencies
+   - `👷` CI build (`💚` fix CI)
+   - `💥` Breaking change (include `BREAKING CHANGE:` footer)
+   - `🚚` Move/rename files or routes
+   - `🚨` Fix compiler/linter warnings
+5. **Never commit secrets**: Abort and warn the user if `.env`, keys, tokens, or credentials appear in the diff.

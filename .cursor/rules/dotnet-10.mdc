@@ -1,0 +1,33 @@
+---
+description: Prefer idiomatic .NET 10 (LTS) and C# 14 features when writing, refactoring, or reviewing C# and .NET code.
+globs:
+  - "**/*.cs"
+  - "**/*.csproj"
+  - "**/*.slnx"
+  - "**/Directory.Build.props"
+alwaysApply: false
+---
+
+# .NET 10 & C# 14 Rules
+
+When working on projects targeting `net10.0`, prefer modern .NET 10 and C# 14 idioms over legacy patterns:
+
+- **C# 14 Language**:
+  - Use the `field` keyword inside property accessors instead of manual private `_backingField` declarations.
+  - Use `extension(...)` blocks for instance/static extension properties, methods, and operators.
+  - Use null-conditional assignment (`obj?.Prop = value;`) instead of verbose null-check guards.
+  - Rely on first-class implicit `Span<T>` / `ReadOnlySpan<T>` conversions instead of unnecessary `.AsSpan()` calls.
+  - Use simple lambda parameter modifiers (`(text, out value) => ...`) and unbound generic `nameof(List<>)`.
+- **ASP.NET Core 10**:
+  - Use built-in OpenAPI 3.1 (`AddOpenApi()` + `MapOpenApi()`, supporting both JSON and `.yaml` routes).
+  - Use built-in Minimal API validation (`builder.Services.AddValidation()`).
+  - Use `TypedResults.ServerSentEvents` with `SseItem<T>` for SSE streaming.
+  - Prefer native `System.Text.Json`-backed JSON Patch over `Newtonsoft.Json`.
+- **EF Core 10**:
+  - Use native `.LeftJoin(...)` / `.RightJoin(...)` instead of `GroupJoin` + `SelectMany` + `DefaultIfEmpty`.
+  - Use Named Query Filters (`HasQueryFilter("Name", ...)` + `IgnoreQueryFilters(["Name"])`) when multiple filters apply to an entity.
+  - Use non-expression lambdas in `ExecuteUpdateAsync` for conditional bulk updates.
+- **Runtime & Tooling**:
+  - For standalone scripts/utilities, use .NET 10 file-based apps (`dotnet run app.cs` with `#:sdk`, `#:package`, `#:property`).
+  - Use `JsonSerializerOptions.Strict` or `AllowDuplicateProperties = false` when strict JSON parsing is needed, and `WebSocketStream` for stream-based WebSockets.
+- **Safety**: Verify `<TargetFramework>net10.0</TargetFramework>` before introducing C# 14 syntax in an existing codebase.
