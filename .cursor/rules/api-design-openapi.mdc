@@ -1,0 +1,20 @@
+---
+description: Design and review REST APIs and OpenAPI 3.1 contracts with RFC 9457 ProblemDetails, cursor pagination, idempotency, and backward-compatible schemas.
+globs:
+  - "**/openapi*.{yaml,yml,json}"
+  - "**/swagger*.{yaml,yml,json}"
+  - "**/*Controller.cs"
+  - "**/*Endpoints.cs"
+alwaysApply: false
+---
+
+# REST API & OpenAPI 3.1 Rules
+
+When designing, modifying, or reviewing HTTP APIs and OpenAPI contracts:
+
+1. **URLs & Verbs**: Use lowercase plural kebab-case nouns (`/v1/orders`) and standard HTTP verbs; avoid RPC-style verb paths.
+2. **Errors**: Always return RFC 9457 `application/problem+json` (`ProblemDetails`) with structured validation `errors` — never raw strings or stack traces.
+3. **Pagination**: Never return unbounded collections; wrap list responses in an object envelope (`items`, `nextCursor`, `hasMore`) and enforce a server-side `limit` cap.
+4. **Idempotency & Concurrency**: Support `Idempotency-Key` on state-changing `POST` endpoints and `ETag`/`If-Match` for optimistic concurrency when appropriate.
+5. **OpenAPI 3.1 Hygiene**: Include unique `operationId`, `summary`, explicit `4xx` responses, ISO-8601 UTC timestamps, explicit currency codes for money, and JSON Schema 2020-12 nullable syntax (`type: ["string", "null"]`).
+6. **Compatibility**: Keep changes additive within a major version; never silently break existing fields or response shapes.
