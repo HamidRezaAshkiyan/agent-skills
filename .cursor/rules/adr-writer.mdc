@@ -1,0 +1,16 @@
+---
+description: Write, update, or supersede Architecture Decision Records (ADRs) in docs/adr/ using a clear, concise MADR-inspired format.
+globs:
+  - "**/docs/adr/**/*.md"
+  - "**/docs/decisions/**/*.md"
+alwaysApply: false
+---
+
+# ADR Writer Rules
+
+When creating or updating Architecture Decision Records:
+
+1. Store ADRs sequentially as `docs/adr/NNNN-kebab-case-title.md` (matching existing repo conventions if already present).
+2. Always include: **Status**, **Date**, **Context & Problem Statement**, **Decision Drivers**, **Decision**, **Alternatives Considered** (at least 2 realistic options with fair pros/cons), and **Consequences** (positive, negative, follow-ups).
+3. Never silently overwrite an `Accepted` ADR when reversing a decision — create a new ADR that supersedes it and mark the old one `Superseded by ADR-XXXX`.
+4. Keep ADRs concise (1–2 pages), objective, and focused on trade-offs rather than implementation tutorials.
