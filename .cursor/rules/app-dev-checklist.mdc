@@ -1,0 +1,18 @@
+---
+description: Production readiness and polish checklist for building, auditing, packaging, or shipping Windows, macOS, Android, and Web / PWA applications (icons, manifests, dark mode, DPI/viewport, permissions, RTL/a11y, installers/signing).
+alwaysApply: false
+---
+
+# Multi-Platform App Development & Release Checklist Rules
+
+When scaffolding, polishing, auditing, packaging, or preparing a release for a **Windows**, **macOS**, **Android**, or **Web / PWA** application:
+
+1. **Icons & Visual Identity**: Never ship default placeholder icons. Verify platform-complete icon sets:
+   - **Windows**: Multi-size `.ico` (`16`–`256` px) in `.csproj` `<ApplicationIcon>` / Win32 `.rc`, explicit `AppWindow.SetIcon` on unpackaged WinUI 3, DPI-aware tray icon cleanly disposed on exit.
+   - **macOS**: `AppIcon.icns` (`16x16`..`512x512@2x` with ~80% squircle canvas padding) + `18pt` `@1x/@2x` `isTemplate = true` menu bar icon.
+   - **Android**: Adaptive launcher icon (`108dp` canvas, `66dp` safe zone) + Android 13+ `<monochrome>` themed icon + monochrome white vector notification small icon + `core-splashscreen`.
+   - **Web / PWA**: `favicon.svg` (dark-mode aware), `favicon.ico` (`32`), opaque `apple-touch-icon.png` (`180`), `192`/`512` icons + dedicated `maskable` icon (80% safe zone), `manifest.webmanifest`, and `1200x630` Open Graph / Twitter preview tags.
+2. **Manifests & Metadata**: Ensure complete `app.manifest` (`PerMonitorV2`, `longPathAware`, Windows 10/11 GUID, `FileDescription`), `Info.plist` (`CFBundle*`, `LSMinimumSystemVersion`, TCC `NS*UsageDescription` keys, `NSMenu` with Edit `⌘C`/`⌘V`), `AndroidManifest.xml` (merged-manifest permission audit via `aapt2 dump permissions`, explicit `android:exported`, backup rules), or HTML `<head>` (`viewport-fit=cover`, `theme-color`, canonical/SEO).
+3. **Theme, Layout, RTL & Accessibility**: Support Light/Dark mode without startup flash, multi-monitor DPI / mobile `dvh` + `safe-area-inset-*` / Android `enableEdgeToEdge()`, logical layout properties for LTR/RTL, keyboard focus/shortcuts, and screen-reader labels.
+4. **Storage, Signing & Scripts**: Store user data only in OS-standard user directories (`%LOCALAPPDATA%`/`%APPDATA%`, `~/Library/Application Support`, `filesDir`/`DataStore`, `IndexedDB`). Test release-minified/signed builds (`codesign` ad-hoc or notarized on macOS, R8 on Android, explicit `x64`/`ARM64` on Windows) and provide paired `.sh` + PowerShell 7 `.ps1` (`#Requires -Version 7.0`) scripts when adding build/install scripts.
+5. Read `skills/app-dev-checklist/SKILL.md` and its `references/{windows,macos,android,webapp}.md` checklists for full platform details.

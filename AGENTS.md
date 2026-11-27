@@ -23,21 +23,28 @@ Reusable **Agent Skills** (`skills/`, open [Agent Skills](https://agentskills.io
 ```text
 agent-skills/
 ├── skills/                             # Cross-agent skills (SKILL.md + references/)
-│   ├── gitmoji-commit/
-│   │   ├── SKILL.md                    # Gitmoji commit workflow & quick-pick table
+│   ├── adr-writer/                     # MADR Architecture Decision Records
+│   ├── api-design-openapi/             # REST API & OpenAPI 3.1 conventions
+│   ├── app-dev-checklist/              # Windows, macOS, Android & Web/PWA checklist
+│   │   ├── SKILL.md
 │   │   └── references/
-│   │       └── gitmoji-guide.md        # Full categorized 70+ emoji reference
-│   └── dotnet-10/
-│       ├── SKILL.md                    # .NET 10 & C# 14 core guidance
-│       └── references/
-│           ├── csharp-14.md
-│           └── aspnet-efcore-runtime.md
+│   │       ├── android.md
+│   │       ├── macos.md
+│   │       ├── webapp.md
+│   │       └── windows.md
+│   ├── dotnet-10/                      # .NET 10 & C# 14 core guidance
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       ├── csharp-14.md
+│   │       └── aspnet-efcore-runtime.md
+│   ├── dotnet-clean-arch/              # Clean Architecture & Vertical Slices for .NET
+│   ├── gitmoji-commit/                 # Gitmoji commit workflow & quick-pick table
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── gitmoji-guide.md
+│   └── pr-review/                      # Severity-ranked PR & diff code review
 ├── .cursor/rules/                      # Cursor rules (*.mdc)
-│   ├── gitmoji-commits.mdc
-│   └── dotnet-10.mdc
 ├── .agents/rules/                      # Antigravity / .agents standard rules (*.md)
-│   ├── gitmoji-commits.md
-│   └── dotnet-10.md
 ├── install.sh                          # Project or --global installer for Cursor, Claude, Antigravity
 ├── AGENTS.md                           # Cross-agent root instructions template (this file)
 ├── CLAUDE.md                           # Claude Code root instructions template

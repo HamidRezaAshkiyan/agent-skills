@@ -4,8 +4,13 @@ Project instructions for Claude Code.
 
 ## Skills
 Install or keep the skills in `skills/` available under `.claude/skills/` (or `~/.claude/skills/`):
+- `skills/app-dev-checklist/` — Production readiness checklist for Windows, macOS, Android, and Web / PWA apps (icons, manifests, dark mode, DPI/viewport, permissions, RTL/a11y, packaging/signing).
 - `skills/gitmoji-commit/` — Gitmoji commit workflow and complete emoji catalog.
 - `skills/dotnet-10/` — Modern .NET 10 (LTS) & C# 14 development patterns.
+- `skills/dotnet-clean-arch/` — Clean Architecture & Vertical Slice boundaries for .NET.
+- `skills/api-design-openapi/` — REST API design & OpenAPI 3.1 specification patterns.
+- `skills/pr-review/` — Severity-ranked Pull Request and diff code review workflow.
+- `skills/adr-writer/` — MADR-style Architecture Decision Record templates and workflow.
 
 ## Rules
 - **Commits**: Always format Git commits using the Gitmoji convention (`✨`, `🐛`, `♻️`, `📝`, `✅`, `🔧`, `💥`, etc.) with a concise imperative subject line (<= 50-72 chars, no trailing period). Never commit secrets.
